@@ -1,3 +1,4 @@
+// Autor: Mateus Munis de Freitas 05881394321
 import java.util.Scanner;
 
 public class ContaTerminal {
