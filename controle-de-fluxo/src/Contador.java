@@ -2,38 +2,41 @@ import java.util.Scanner;
 
 public class Contador {
 
-	public static void main(String[] args) {
-		Scanner entrada = new Scanner(System.in);
-		
-		System.out.println("Digite o primeiro parâmetro");
-		int parametroUm = entrada.nextInt();
-		System.out.println("Digite o segundo parâmetro");
-		int parametroDois = entrada.nextInt();
-		
-		try {
-			//chamando o método contendo a lógica de contagem
-			contar(parametroUm, parametroDois);
-		
-		}catch (ParametrosInvalidosException e) {
-			//imprimir a mensagem: O segundo parâmetro deve ser maior que o primeiro
-			e.printStackTrace();
-		}
-		
-	}
-	static void contar(int parametroUm, int parametroDois ) throws ParametrosInvalidosException {
-		//validar se parametroUm é MAIOR que parametroDois e lançar a exceção
-		if(parametroUm > parametroDois) {
-			throw new ParametrosInvalidosException("O segundo parâmetro deve ser maior que o primeiro!");
-		}else {
-			//realizar o for para imprimir os números com base na variável contagem
-			int contagem = parametroDois - parametroUm;
-			for(int i=1; i<=contagem; i++) {
-				System.out.println("Imprimindo o número "+i);
-			}
-		}
-		
-		
-		
-	}
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double saldo = 0;
+        boolean continuar = true;
 
+        while (continuar) {
+
+            int opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    saldo += scanner.nextDouble();
+                    System.out.printf("Saldo atual: %.1f", saldo);
+                    break;
+                case 2:
+                    double saque = scanner.nextDouble();
+                    
+                    if(saque < saldo){
+                      saldo-= saque;
+                      System.out.printf("Saldo atual: %.1f", saldo);
+                    }else{
+                      System.out.println("Saldo insuficiente.");
+                    }
+                    break;
+                case 3:
+                    System.out.printf("Saldo atual: %.1f", saldo);
+                    break;
+                case 0:
+                    System.out.println("Programa encerrado.");
+                    continuar = false;  // Atualiza a variável de controle para encerrar o loop
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+        }
+        scanner.close();
+    }
 }
